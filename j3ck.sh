@@ -83,6 +83,8 @@ git clone https://github.com/jeckin/easycrontab
 chmod +x easycrontab/install.sh
 easycrontab/install.sh
 read temp
+rm -r easycrontab
+exit="true"
 }
 
 update() {
