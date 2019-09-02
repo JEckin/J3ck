@@ -34,6 +34,7 @@ echo "---------------------------------------------------"
 #printf "\\e[1;93m[\\e[0m\\e[1;77m02\\e[0m\\e[1;93m] Start\\e[0m\\n"
 printf " 1) MAC Spoofing		2) NMAP Scan  \n"
 printf " 3) SSH without password	4) Palgo - Password Algorythm\n"
+printf " 5) IP\n"
 printf "99) Exit \n"
 
 read o
@@ -53,6 +54,9 @@ sshpw
 4)
 palgo
 ;;
+5)
+ipa
+;;
 99)
 exit
 ;;
@@ -60,14 +64,35 @@ exit
 ;;
 esac
 done
-
-
-
-
 }
+
 start() {
 exit="false"
 main
+}
+
+ipa() {
+clear
+echo "1) Get Public IP"
+echo "2) Forwarding Ports"
+read t
+case "$t" in
+1)
+curl icanhazip.com
+read temp
+;;
+2)
+echo "Name:"
+read name
+echo "IP"
+read ip
+echo "Port:"
+read ports
+echo "ssh -o ServerAliveInterval=60 -R $name:$ports:$ip:$ports serveo.net" > /bin/forward-$name-$port
+chmod +x /bin/forward-$name-$port
+screen /bin/forward-$name-$port
+;;
+esac
 }
 
 palgo() {
@@ -126,10 +151,6 @@ echo "Finished"
 echo "press enter to test"
 echo "or do: SSH -p $port $user@$ip"
 ssh -p $port $user@$ip && z="true"
-if [[
-}
-
-addzombie() {
 }
 
 nmapc() {
@@ -138,6 +159,7 @@ nmape="false"
 clear
 echo "IP (for IP Network Scan: 192.168.XXX.1/XX):"
 read ip
+n=""
 while [ $nmape == "false" ]
 do
 t=""
@@ -150,8 +172,9 @@ echo "4) OS Scan"
 echo "5) Scan IPv6"
 echo "6) Scan specific Ports"
 echo "7) Verbose option"
-echo "98) Finish"
+echo "98) Clear"
 echo "99) Cancel"
+echo "Enter) Start"
 read t
 case "$t" in
 1)
@@ -183,14 +206,7 @@ read v
 n+=" -$v "
 ;;
 98)
-echo "Press enter to Start"
-nmape="true"
-read temp
-clear
-nmap $n $ip
-echo "==================="
-echo "press enter..."
-read temp
+n=""
 ;;
 99)
 echo "Canceled"
