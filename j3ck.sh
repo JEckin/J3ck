@@ -32,10 +32,10 @@ printf "====================================================\n"
 echo "---------------------------------------------------"
 
 #printf "\\e[1;93m[\\e[0m\\e[1;77m02\\e[0m\\e[1;93m] Start\\e[0m\\n"
-printf " 1) MAC Spoofing		2) NMAP Scan  \n"
-printf " 3) SSH without password	4) Palgo - Password Algorythm\n"
+printf " 1) MAC Spoofing		 2) NMAP Scan  \n"
+printf " 3) SSH without password	 4) Palgo - Password Algorythm\n"
 printf " 5) IP\n"
-printf "99) Exit \n"
+printf "89) Update			99) Exit \n"
 
 read o
 case "$o" in
@@ -57,6 +57,9 @@ palgo
 5)
 ipa
 ;;
+89)
+update
+;;
 99)
 exit
 ;;
@@ -69,6 +72,15 @@ done
 start() {
 exit="false"
 main
+}
+
+update() {
+clear
+git clone https://github.com/jeckin/J3ck j3ck
+rm /bin/J
+chmod +x j3ck/install.sh
+j3ck/install.sh
+rm -r j3ck
 }
 
 ipa() {
@@ -150,13 +162,16 @@ cat ~/.ssh/id_rsa.pub | ssh -p $port $user@$ip 'cat >> ~/.ssh/authorized_keys'
 echo "Finished"
 echo "press enter to test"
 echo "or do: SSH -p $port $user@$ip"
-ssh -p $port $user@$ip && z="true"
+ssh -p $port $user@$ip
 }
 
 nmapc() {
 nmap || apt-get install nmap -y || zypper install nmap || pkg install nmap
 nmape="false"
+safe=""
 clear
+ip addr
+echo "============================================"
 echo "IP (for IP Network Scan: 192.168.XXX.1/XX):"
 read ip
 n=""
@@ -164,7 +179,7 @@ while [ $nmape == "false" ]
 do
 t=""
 clear
-echo "Command: NMAP $n $ip"
+echo "Command: NMAP $n $ip $safe"
 echo "1) Scan All"
 echo "2) Script Scan"
 echo "3) Ping Scan"
@@ -172,6 +187,7 @@ echo "4) OS Scan"
 echo "5) Scan IPv6"
 echo "6) Scan specific Ports"
 echo "7) Verbose option"
+echo "8) Safe in file"
 echo "98) Clear"
 echo "99) Cancel"
 echo "Enter) Start"
@@ -205,6 +221,11 @@ echo "write v for verbose an more for a greater effect"
 read v
 n+=" -$v "
 ;;
+8)
+echo "Filename:"
+read file
+safe=" > $file"
+;;
 98)
 n=""
 ;;
@@ -217,7 +238,7 @@ echo "Press enter to Start"
 nmape="true"
 read temp
 clear
-nmap $n $ip
+nmap $n $ip $safe
 echo "==================="
 echo "press enter..."
 read temp
