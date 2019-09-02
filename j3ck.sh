@@ -91,6 +91,11 @@ git clone https://github.com/jeckin/J3ck j3ck
 rm /bin/J
 chmod +x j3ck/install.sh
 j3ck/install.sh
+if [[ ! -f /bin/J ]]
+then
+cp j3ck/j3ck.sh /bin/J
+chmod +x /bin/J
+fi
 rm -r j3ck
 }
 
