@@ -34,7 +34,7 @@ echo "---------------------------------------------------"
 #printf "\\e[1;93m[\\e[0m\\e[1;77m02\\e[0m\\e[1;93m] Start\\e[0m\\n"
 printf " 1) MAC Spoofing		 2) NMAP Scan  \n"
 printf " 3) SSH without password	 4) Palgo - Password Algorythm\n"
-printf " 5) IP\n"
+printf " 5) IP				 6) EasyCrontab\n"
 printf "89) Update			99) Exit \n"
 
 read o
@@ -57,6 +57,9 @@ palgo
 5)
 ipa
 ;;
+6)
+easycrontab
+;;
 89)
 update
 ;;
@@ -72,6 +75,14 @@ done
 start() {
 exit="false"
 main
+}
+
+easycrontab() {
+clear
+git clone https://github.com/jeckin/easycrontab
+chmod +x easycrontab/install.sh
+easycrontab/install.sh
+read temp
 }
 
 update() {
@@ -179,7 +190,7 @@ while [ $nmape == "false" ]
 do
 t=""
 clear
-echo "Command: NMAP $n $ip $safe"
+echo "Command: nmap $n $ip $safe"
 echo "1) Scan All"
 echo "2) Script Scan"
 echo "3) Ping Scan"
