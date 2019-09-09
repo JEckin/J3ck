@@ -31,10 +31,11 @@ printf "      \______/  \______/  \_______/|__/  \__/ \n"
 printf "====================================================\n"
 echo "---------------------------------------------------"
 
-#printf "\\e[1;93m[\\e[0m\\e[1;77m02\\e[0m\\e[1;93m] Start\\e[0m\\n"
+#printf "\\e[1;93m[\\e[0m\\e[1;77m02\\e[0m\\e[1;93m] Start\\e[0m\ \n"
 printf " 1) MAC Spoofing		 2) NMAP Scan  \n"
-printf " 3) SSH without password	 4) Palgo - Password Algorythm\n"
-printf " 5) IP				 6) EasyCrontab\n"
+printf " 3) SSH without password	 4) Palgo - Password Algorythm \n"
+printf " 5) IP				 6) EasyCrontab \n"
+printf " 7) Loop Task \n"
 printf "89) Update			99) Exit \n"
 
 read o
@@ -60,10 +61,14 @@ ipa
 6)
 easycrontab
 ;;
+7)
+loop
+;;
 89)
 update
 ;;
 99)
+clear
 exit
 ;;
 *)
@@ -75,6 +80,47 @@ done
 start() {
 exit="false"
 main
+}
+
+loop() {
+clear
+
+if [[ ! -f /bin/task ]]
+then
+echo "
+#!/bin/bash
+clear
+echo "Task"
+read task
+clear
+echo "Time"
+read time
+while true
+do
+        clear
+        $task
+        sleep $time
+done
+" > /bin/task
+chmod +x /bin/task
+echo "Done"
+echo "Do 'task' to Start a task"
+read temp
+else
+clear
+echo "Task"
+read task
+clear
+echo "Time"
+read time
+while true
+do
+        clear
+        $task
+        sleep $time
+done
+fi
+
 }
 
 easycrontab() {
