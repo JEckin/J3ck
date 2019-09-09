@@ -87,8 +87,7 @@ clear
 
 if [[ ! -f /bin/task ]]
 then
-echo "
-#!/bin/bash
+echo "#!/bin/bash
 clear
 echo "Task"
 read task
@@ -98,8 +97,8 @@ read time
 while true
 do
         clear
-        $task
-        sleep $time
+        \$task
+        sleep \$time
 done
 " > /bin/task
 chmod +x /bin/task
