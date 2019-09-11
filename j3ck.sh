@@ -175,7 +175,7 @@ ipparam vpn" > /etc/ppp/peers/vpn
 echo "#!/bin/bash
 
 if [ \"\$PPP_IPPARAM\" == \"vpn\" ]; then
-        route add -net 192.168.1.1/24 dev $PPP_IFACE
+        route add -net 192.168.1.1/24 dev \$PPP_IFACE
 fi" > /etc/ppp/ip-up.d/99vpnroute
 sudo chmod +x /etc/ppp/ip-up.d/99vpnroute
 pon vpn
