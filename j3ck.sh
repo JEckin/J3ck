@@ -36,6 +36,7 @@ printf " 1) MAC Spoofing		 2) NMAP Scan  \n"
 printf " 3) SSH without password	 4) Palgo - Password Algorythm \n"
 printf " 5) IP				 6) EasyCrontab \n"
 printf " 7) Loop Task 			 8) PPTP VPN\n"
+printf " 9) Port Forwarding \n"
 printf "89) Update			99) Exit \n"
 
 read o
@@ -67,6 +68,9 @@ loop
 8)
 vpn
 ;;
+9)
+port
+;;
 89)
 update
 ;;
@@ -83,6 +87,55 @@ done
 start() {
 exit="false"
 main
+}
+
+port() {
+clear
+echo "1) IPv4 Port Forwarding"
+echo "2) IPv6 Port Forwarding - (comming soon)"
+echo "3) Show Forwarding Ports"
+read t
+case "$t" in
+1)
+portipv4
+;;
+2)
+portipv6
+;;
+3)
+iptables -t nat -L -n -v
+echo "=============="
+echo "Press enter..."
+read temp
+;;
+esac
+}
+
+portipv4() {
+clear
+echo "From IP:"
+read ipone
+echo "From Port:"
+read portone
+echo "To IP:"
+read iptwo
+echo "To Port:"
+read porttwo
+echo "TCP or UDP? (1=TCP,2=UDP)"
+read tu
+if [[ $tu == "1" ]]
+then
+tcpudp="tcp"
+else
+tcpudp="udp"
+fi
+sysctl net.ipv4.ip_forward=1
+sysctl -p
+iptables -t nat -A PREROUTING -p $tcpudp -d $ipone --dport $portone -j DNAT --to-destination $iptwo:$porttwo
+iptables -t nat -A POSTROUTING -j MASQUERADE
+clear
+echo "Finished - Press enter..."
+read temp
 }
 
 vpn() {
