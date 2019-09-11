@@ -35,7 +35,7 @@ echo "---------------------------------------------------"
 printf " 1) MAC Spoofing		 2) NMAP Scan  \n"
 printf " 3) SSH without password	 4) Palgo - Password Algorythm \n"
 printf " 5) IP				 6) EasyCrontab \n"
-printf " 7) Loop Task \n"
+printf " 7) Loop Task 			 8) PPTP VPN\n"
 printf "89) Update			99) Exit \n"
 
 read o
@@ -64,6 +64,9 @@ easycrontab
 7)
 loop
 ;;
+8)
+vpn
+;;
 89)
 update
 ;;
@@ -80,6 +83,103 @@ done
 start() {
 exit="false"
 main
+}
+
+vpn() {
+clear
+echo "1) Create PPTP VPN"
+echo "2) Create Connection PPTP VPN"
+echo "3) Start Connection to PPTP VPN"
+echo "4) Stop Connection to PPTP VPN"
+echo "5) Show Connection"
+read t
+case "$t" in
+1)
+vpn1
+;;
+2)
+vpn2
+;;
+3)
+pon vpn
+tail -f /var/log/messages -n 50 | grep pppd
+;;
+4)
+poff vpn
+tail -f /var/log/messages -n 50 | grep pppd
+;;
+5)
+tail -f /var/log/messages | grep pppd
+;;
+
+}
+
+vpn1() {
+clear
+echo "Warning it only tested on Ubuntu"
+echo "press enter to start..."
+read temp
+apt-get install pptpd
+echo "localip 192.168.1.5
+remoteip 192.168.1.234-238,192.168.1.245" >> /etc/pptpd.conf
+echo "ms-dns 192.168.1.1
+nobsdcomp
+noipx
+mtu 1490
+mru 1490" >> /etc/ppp/pptd-options
+clear
+echo "Username:"
+read username
+echo "Password (clear-text):"
+read pass
+echo "$username	*	$pass	*" >> /etc/ppp/chap-secrets
+sudo /etc/init.d/pptpd restart
+clear
+echo "Enable IPv4 forwarding?(Y/n)"
+read y
+if [[ $y == "n" ]]
+then
+else
+echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+sudo sysctl -p
+fi
+clear
+echo "Finished!"
+echo "Connect with:"
+echo "Username: $username"
+echo "Password: $pass"
+exit="true"
+}
+
+vpn2() {
+clear
+echo "Warning it isnt complete tested"
+read temp
+if [[ ! -f /etc/ppp/peers/vpn ]]
+then
+sudo apt-get -y install pptp-linux
+echo "Server:"
+read server
+echo "Username:"
+read username
+echo "Password (clear-text):"
+read password
+echo "$username	vpn	$password	*" >> /etc/ppp/chap-secrets
+echo "pty \"pptp $server --nolaunchpppd\"
+name $username
+remotename vpn
+require-mppe-128
+file /etc/ppp/options.pptp
+ipparam vpn" > /etc/ppp/peers/vpn
+echo "#!/bin/bash
+
+if [ \"\$PPP_IPPARAM\" == \"vpn\" ]; then
+        route add -net 192.168.1.1/24 dev $PPP_IFACE
+fi" > /etc/ppp/ip-up.d/99vpnroute
+sudo chmod +x /etc/ppp/ip-up.d/99vpnroute
+pon vpn
+tail -f /var/log/messages | grep pppd
+fi
 }
 
 loop() {
