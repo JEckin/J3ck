@@ -111,7 +111,7 @@ tail -f /var/log/messages -n 50 | grep pppd
 5)
 tail -f /var/log/messages | grep pppd
 ;;
-
+esac
 }
 
 vpn1() {
@@ -139,6 +139,7 @@ echo "Enable IPv4 forwarding?(Y/n)"
 read y
 if [[ $y == "n" ]]
 then
+echo ""
 else
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 sudo sysctl -p
