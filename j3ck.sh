@@ -99,28 +99,27 @@ echo "2a) SFTP Server 2b) permanent"
 echo "3) FTP Server 3b) permanent"
 read t
 case "$t" in
-1a | 1b)
+1b)
 sudo apt-get install davfs2 -y
 clear
-echo "Servername:"
-read name
-sudo mkdir /mnt/$name
+echo "Mount Folder: "
+read folder
 echo "Serverlink (https://yourcloud.com/):"
 read link
 if [[ $t == "1a" ]]
 then
-sudo mount -t davfs -o noexec $link /mnt/$name/ || echo "Error"
+sudo mount -t davfs -o noexec $link $folder || echo "Error"
 else
 clear
 echo "User:"
 read $user
 echo "Password (Warning cleartext):"
 read $pass
-echo "$link /mnt/$name davfs _netdev,noauto,user,uid=$user 0 0" >> /etc/fstab/
-echo "/mnt/$name $user $pass" >> /etc/davfs2/secrets
-mount /mnt/dav
+echo "$link $folder davfs _netdev,noauto,user,uid=$user 0 0" >> /etc/fstab
+echo "$folder $user $pass" >> /etc/davfs2/secrets
+mount $folder
 clear
-echo "Mount on start(Y/n)?"
+echo "Mount on reboot(Y/n)?"
 read n
 if [[ ! $n == "n" ]]
 then
