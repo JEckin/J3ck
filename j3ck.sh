@@ -37,7 +37,7 @@ printf " 3) SSH without password	 4) Palgo - Password Algorythm \n"
 printf " 5) IP				 6) EasyCrontab \n"
 printf " 7) Loop Task 			 8) PPTP VPN\n"
 printf " 9) Port Forwarding 		10) Mount Server\n"
-printf "89) Update			99) Exit \n"
+printf "89) Update/Install			99) Exit \n"
 
 read o
 case "$o" in
@@ -373,27 +373,22 @@ update() {
 clear
 git clone https://github.com/jeckin/J3ck /tmp/j3ck
 rm /bin/J
-chmod +x /tmp/j3ck/install.sh
 ####Install####
 apt-get install nmap || zypper install nmap || pkg install nmap
 apt-get install macchanger || zypper install macchanger || pkg install macchanger
-cp j3ck.sh /bin/J
-chmod +x /bin/J
-if [[ ! -d /etc/j3ck ]]
-then
-mkdir /etc/j3ck
-fi
+cp /tmp/j3ck/j3ck.sh /bin/J
+sudo chmod +x /bin/J
 ###############
 rm -r /tmp/j3ck
 }
 
 ipa() {
 clear
-echo "1) Get Public IP"
-echo "2) Forwarding Ports"
-echo "3on) Set Interface on	3off) Set Interface off "
-echo "4add) Add IP to Interface 4del) Del IP from Interface"
-echo "5) Flush Interface"
+echo "1)    Get Public IP"
+echo "2)    Forwarding Ports"
+echo "3on)  Set Interface on		3off) Set Interface off "
+echo "4add) Add IP to Interface		4del) Del IP from Interface"
+echo "5)    Flush Interface"
 read t
 case "$t" in
 1)
