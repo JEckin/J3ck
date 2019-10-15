@@ -37,7 +37,7 @@ printf " 3) SSH without password	 4) Palgo - Password Algorythm \n"
 printf " 5) IP				 6) EasyCrontab \n"
 printf " 7) Loop Task 			 8) PPTP VPN\n"
 printf " 9) Port Forwarding 		10) Mount Server\n"
-printf "89) Update/Install			99) Exit \n"
+printf "89) Update/Install		99) Exit \n"
 
 read o
 case "$o" in
