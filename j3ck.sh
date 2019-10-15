@@ -371,16 +371,11 @@ exit="true"
 
 update() {
 clear
-git clone https://github.com/jeckin/J3ck j3ck
+git clone https://github.com/jeckin/J3ck /tmp/j3ck
 rm /bin/J
-chmod +x j3ck/install.sh
-j3ck/install.sh
-if [[ ! -f /bin/J ]]
-then
-cp j3ck/j3ck.sh /bin/J
-chmod +x /bin/J
-fi
-rm -r j3ck
+chmod +x /tmp/j3ck/install.sh
+/tmp/j3ck/install.sh
+rm -r /tmp/j3ck
 }
 
 ipa() {
