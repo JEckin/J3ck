@@ -387,7 +387,7 @@ clear
 echo "   1) Get Public IP"
 echo "   2) Forwarding Ports"
 echo " 3on) Set Interface on		3off) Set Interface off "
-echo "4add) Add IP to Interface		4del) Del IP from Interface"
+echo "4add) Add IP to Interface	4del) Del IP from Interface"
 echo "   5) Flush Interface"
 read t
 case "$t" in
