@@ -95,16 +95,26 @@ main
 mntsrv() {
 clear
 echo "1a) WEBDAV Server once 1b) permanent"
-echo "2a) SFTP Server 2b) permanent"
-echo "3) FTP Server 3b) permanent"
+echo "2) SFTP Server"
+echo "3) FTP Server"
 read t
 case "$t" in
+1a)
+sudo apt-get install davfs2 -y
+clear
+echo "Serverlink (https://yourcloud.com/webdav):"
+read link
+echo "Mount Folder (/mnt/dav): "
+read folder
+sudo mount -t davfs -o noexec $link $folder
+exit="true"
+;;
 1b)
 sudo apt-get install davfs2 -y
 clear
-echo "Mount Folder: "
+echo "Mount Folder (/mnt/dav): "
 read folder
-echo "Serverlink (https://yourcloud.com/):"
+echo "Serverlink (https://yourcloud.com/webdav):"
 read link
 if [[ $t == "1a" ]]
 then
@@ -127,6 +137,37 @@ echo "@reboot	root	mount /mnt/$name" >> /etc/crontab
 
 fi
 fi
+exit="true"
+;;
+2)
+sudo apt-get install sshfs
+clear
+echo "IP or Hostname:"
+read ip
+echo "User:"
+read user
+echo "Path on the Server:"
+read paths
+echo "Mount path"
+read pathm
+sshfs $user@$ip:$paths $pathm
+;;
+3)
+sudo apt-get install curlftpfs
+clear
+echo "User:"
+read user
+echo "Password (Warning Cleartext!):"
+read pass
+echo "Hostname:"
+read hostname
+echo "Mount path"
+read path
+curlftpfs $user:$pass@$hostname $path
+pass=""
+df -h
+read temp
+exit="true"
 ;;
 esac
 }
