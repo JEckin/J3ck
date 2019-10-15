@@ -382,6 +382,9 @@ ipa() {
 clear
 echo "1) Get Public IP"
 echo "2) Forwarding Ports"
+echo "3on) Set Interface on	3off) Set Interface off "
+echo "4add) Add IP to Interface 4del) Del IP from Interface"
+echo "5) Flush Interface"
 read t
 case "$t" in
 1)
@@ -398,6 +401,55 @@ read ports
 echo "ssh -o ServerAliveInterval=60 -R $name:$ports:$ip:$ports serveo.net" > /bin/forward-$name-$port
 chmod +x /bin/forward-$name-$port
 screen /bin/forward-$name-$port
+;;
+3on)
+clear
+ip addr
+echo "==========="
+echo "Interface:"
+read int
+ip link set dev $int down
+;;
+3off)
+clear
+ip addr
+echo "==========="
+echo "Interface:"
+read int
+ip link set dev $int up
+;;
+4add)
+clear
+ip addr
+echo "==========="
+echo "Interface:"
+read int
+echo "IP:"
+read ip
+ip addr add dev $int $ip
+;;
+4del)
+clear
+ip addr
+echo "==========="
+echo "Interface:"
+read int
+echo "IP:"
+read ip
+ip addr del dev $int $ip
+;;
+5)
+clear
+ip addr
+echo "==========="
+echo "Interface:"
+read int
+echo "are you sure? (y/N)"
+read sure
+if [[ $sure == "y" ]]
+then
+ip addr flush dev $int
+fi
 ;;
 esac
 }
