@@ -380,6 +380,7 @@ cp /tmp/j3ck/j3ck.sh /bin/J
 sudo chmod +x /bin/J
 ###############
 rm -r /tmp/j3ck
+exit="true"
 }
 
 ipa() {
