@@ -618,6 +618,7 @@ case "$a" in
 1)
 echo "New MAC ( like 0A:1B:2C:3D:4E:5F): "
 read m
+clear
 ip link set dev $i down
 sleep 5
 ip link set dev $i address $m
@@ -626,11 +627,12 @@ ip link set dev $i up
 sleep 5
 clear
 ip addr show dev $i
-echo "==================="
+echo "=========================================="
 macchanger -s $i
 read temp
 ;;
 2)
+clear
 ip link set dev $i down
 sleep 5
 macchanger -r $i
@@ -639,11 +641,12 @@ ip link set dev $i up
 sleep 5
 clear
 ip addr show dev $i
-echo "==================="
+echo "=========================================="
 macchanger -s $i
 read temp
 ;;
 3)
+clear
 ip link set dev $i down
 sleep 5
 macchanger -p $i
@@ -652,7 +655,7 @@ ip link set dev $i up
 sleep 5
 clear
 ip addr show dev $i
-echo "==================="
+echo "=========================================="
 macchanger -s $i
 read temp
 ;;
