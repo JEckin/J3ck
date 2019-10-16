@@ -620,8 +620,9 @@ read m
 ip link set dev $i down
 sleep 5
 ip link set dev $i address $m
-sleep 10
+sleep 4
 ip link set dev $i up
+sleep 5
 clear
 ip addr show dev $i
 echo "==================="
@@ -632,8 +633,10 @@ read temp
 ip link set dev $i down
 sleep 5
 macchanger -r $i
-sleep 10
+sleep 4
 ip link set dev $i up
+sleep 5
+clear
 ip addr show dev $i
 echo "==================="
 macchanger -s $i
@@ -643,8 +646,10 @@ read temp
 ip link set dev $i down
 sleep 5
 macchanger -p $i
-sleep 10
+sleep 4
 ip link set dev $i up
+sleep 5
+clear
 ip addr show dev $i
 echo "==================="
 macchanger -s $i
