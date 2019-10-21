@@ -1,4 +1,4 @@
-#!/bin/bash
+y#!/bin/bash
 
 check() {
 if [ ! -d /etc/j3ck ]
@@ -18,26 +18,27 @@ main() {
 while [ $exit == "false" ]
 do
 clear
-printf "\\e[1;37m===================================================\n"
-printf "         /\$\$\$\$\$  /\$\$\$\$\$\$            /\$\$       \n"
-printf "        |__  \$\$ /\$\$__  \$\$          | \$\$       \n"
-printf "           | \$\$|__/  \ \$\$  /\$\$\$\$\$\$\$| \$\$   /\$\$ \n"
-printf "           | \$\$   /\$\$\$\$\$/ /\$\$_____/| \$\$  /\$\$/ \n"
-printf "      /\$\$  | \$\$  |___  \$\$| \$\$      | \$\$\$\$\$\$/  \n"
-printf "     | \$\$  | \$\$ /\$\$  \ \$\$| \$\$      | \$\$_  \$\$  \n"
-printf "     |  \$\$\$\$\$\$/|  \$\$\$\$\$\$/|  \$\$\$\$\$\$\$| \$\$ \  \$\$ \n"
-printf "      \______/  \______/  \_______/|__/  \__/ \n"
-printf "====================================================\n"
+printf "\\e[1;37m++==================================================++\n"
+printf "||         /\$\$\$\$\$  /\$\$\$\$\$\$            /\$\$           || \n"
+printf "||        |__  \$\$ /\$\$__  \$\$          | \$\$           ||\n"
+printf "||           | \$\$|__/  \ \$\$  /\$\$\$\$\$\$\$| \$\$   /\$\$     ||\n"
+printf "||           | \$\$   /\$\$\$\$\$/ /\$\$_____/| \$\$  /\$\$/     ||\n"
+printf "||      /\$\$  | \$\$  |___  \$\$| \$\$      | \$\$\$\$\$\$/      ||\n"
+printf "||     | \$\$  | \$\$ /\$\$  \ \$\$| \$\$      | \$\$_  \$\$      ||\n"
+printf "||     |  \$\$\$\$\$\$/|  \$\$\$\$\$\$/|  \$\$\$\$\$\$\$| \$\$ \  \$\$     ||\n"
+printf "||      \______/  \______/  \_______/|__/  \__/     ||\n"
+printf "++==================================================++\n\n"
 
 #printf "\\e[1;93m[\\e[0m\\e[1;77m02\\e[0m\\e[1;93m] Start\\e[0m\ \n"
-printf " \\e[1;37m1]\\e[0m \\e[0;37mMAC Spoofing\\e[0m		 \\e[1;37m2]\\e[0m \\e[0;37mNMAP Scan\\e[0m  \n"
-printf " \\e[1;37m3]\\e[0m \\e[0;37mSSH without password\\e[0m	 \\e[1;37m4]\\e[0m \\e[0;37mPalgo - Password Algorythm\\e[0m \n"
-printf " \\e[1;37m5]\\e[0m \\e[0;37mIP\\e[0m				 \\e[1;37m6]\\e[0m \\e[0;37mEasyCrontab\\e[0m \n"
-printf " \\e[1;37m7]\\e[0m \\e[0;37mLoop Task\\e[0m 			 \\e[1;37m8]\\e[0m \\e[0;37mPPTP VPN\\e[0m\n"
-printf " \\e[1;37m9]\\e[0m \\e[0;37mPort Forwarding\\e[0m 		\\e[1;37m10]\\e[0m \\e[0;37mMount Server\\e[0m\n"
+printf "\\e[1;37m01]\\e[0m \\e[0;37mMAC Spoofing\\e[0m		\\e[1;37m02]\\e[0m \\e[0;37mNMAP Scan\\e[0m  \n"
+printf "\\e[1;37m03]\\e[0m \\e[0;37mSSH without password\\e[0m	\\e[1;37m04]\\e[0m \\e[0;37mPalgo - Password Algorythm\\e[0m \n"
+printf "\\e[1;37m05]\\e[0m \\e[0;37mIP\\e[0m				\\e[1;37m06]\\e[0m \\e[0;37mEasyCrontab\\e[0m \n"
+printf "\\e[1;37m07]\\e[0m \\e[0;37mLoop Task\\e[0m 			\\e[1;37m08]\\e[0m \\e[0;37mPPTP VPN\\e[0m\n"
+printf "\\e[1;37m09]\\e[0m \\e[0;37mPort Forwarding\\e[0m 		\\e[1;37m10]\\e[0m \\e[0;37mMount Server\\e[0m\n"
 printf "\\e[1;37m98]\\e[0m \\e[1;33mUpdate/Install\\e[0m		\\e[1;37m99]\\e[0m \\e[0;31mExit\\e[0m \n"
-
+#printf "\\e[1;37m"
 read o
+#printf "\\e[0m"
 case "$o" in
 "exit"|"q")
 exit=true
@@ -77,6 +78,7 @@ update
 ;;
 99)
 clear
+printf "\\e[0m"
 exit
 ;;
 *)
