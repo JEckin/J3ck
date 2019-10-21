@@ -18,8 +18,7 @@ main() {
 while [ $exit == "false" ]
 do
 clear
-echo "---------------------------------------------------"
-printf "===================================================\n"
+printf "\\e[1;37m===================================================\n"
 printf "         /\$\$\$\$\$  /\$\$\$\$\$\$            /\$\$       \n"
 printf "        |__  \$\$ /\$\$__  \$\$          | \$\$       \n"
 printf "           | \$\$|__/  \ \$\$  /\$\$\$\$\$\$\$| \$\$   /\$\$ \n"
@@ -29,15 +28,14 @@ printf "     | \$\$  | \$\$ /\$\$  \ \$\$| \$\$      | \$\$_  \$\$  \n"
 printf "     |  \$\$\$\$\$\$/|  \$\$\$\$\$\$/|  \$\$\$\$\$\$\$| \$\$ \  \$\$ \n"
 printf "      \______/  \______/  \_______/|__/  \__/ \n"
 printf "====================================================\n"
-echo "---------------------------------------------------"
 
 #printf "\\e[1;93m[\\e[0m\\e[1;77m02\\e[0m\\e[1;93m] Start\\e[0m\ \n"
-printf " 1) MAC Spoofing		 2) NMAP Scan  \n"
-printf " 3) SSH without password	 4) Palgo - Password Algorythm \n"
-printf " 5) IP				 6) EasyCrontab \n"
-printf " 7) Loop Task 			 8) PPTP VPN\n"
-printf " 9) Port Forwarding 		10) Mount Server\n"
-printf "98) Update/Install		99) Exit \n"
+printf " \\e[1;37m1]\\e[0m \\e[0;37mMAC Spoofing\\e[0m		 \\e[1;37m2]\\e[0m \\e[0;37mNMAP Scan\\e[0m  \n"
+printf " \\e[1;37m3]\\e[0m \\e[0;37mSSH without password\\e[0m	 \\e[1;37m4]\\e[0m \\e[0;37mPalgo - Password Algorythm\\e[0m \n"
+printf " \\e[1;37m5]\\e[0m \\e[0;37mIP\\e[0m				 \\e[1;37m6]\\e[0m \\e[0;37mEasyCrontab\\e[0m \n"
+printf " \\e[1;37m7]\\e[0m \\e[0;37mLoop Task\\e[0m 			 \\e[1;37m8]\\e[0m \\e[0;37mPPTP VPN\\e[0m\n"
+printf " \\e[1;37m9]\\e[0m \\e[0;37mPort Forwarding\\e[0m 		\\e[1;37m10]\\e[0m \\e[0;37mMount Server\\e[0m\n"
+printf "\\e[1;37m98]\\e[0m \\e[1;33mUpdate/Install\\e[0m		\\e[1;37m99]\\e[0m \\e[0;31mExit\\e[0m \n"
 
 read o
 case "$o" in
