@@ -403,14 +403,14 @@ exit="true"
 update() {
 clear
 git clone https://github.com/jeckin/J3ck /tmp/j3ck
-rm /bin/J
+rm -f /bin/J
 ####Install####
 apt-get install nmap || zypper install nmap || pkg install nmap
 apt-get install macchanger || zypper install macchanger || pkg install macchanger
 cp /tmp/j3ck/j3ck.sh /bin/J
 sudo chmod +x /bin/J
 ###############
-rm -r /tmp/j3ck
+rm -rf /tmp/j3ck
 exit="true"
 }
 
