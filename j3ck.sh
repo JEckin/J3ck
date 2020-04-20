@@ -121,6 +121,7 @@ echo "Binding Port"
 read bport
 ssh -p$portc -fNC -R $bport:localhost:22 $user@$ip
 ;;
+esac
 }
 
 mntsrv() {
