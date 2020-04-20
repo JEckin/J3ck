@@ -35,6 +35,7 @@ printf "\\e[1;37m03]\\e[0m \\e[0;37mSSH without password\\e[0m	\\e[1;37m04]\\e[0
 printf "\\e[1;37m05]\\e[0m \\e[0;37mIP\\e[0m				\\e[1;37m06]\\e[0m \\e[0;37mEasyCrontab\\e[0m \n"
 printf "\\e[1;37m07]\\e[0m \\e[0;37mLoop Task\\e[0m 			\\e[1;37m08]\\e[0m \\e[0;37mPPTP VPN\\e[0m\n"
 printf "\\e[1;37m09]\\e[0m \\e[0;37mPort Forwarding\\e[0m 		\\e[1;37m10]\\e[0m \\e[0;37mMount Server\\e[0m\n"
+printf "\\e[1;37m11]\\e[0m \\e[0;37mReverse SSH\\e[0m\n"
 printf "\\e[1;37m98]\\e[0m \\e[1;33mUpdate/Install\\e[0m		\\e[1;37m99]\\e[0m \\e[0;31mExit\\e[0m \n"
 #printf "\\e[1;37m"
 read o
@@ -73,6 +74,9 @@ port
 10)
 mntsrv
 ;;
+11)
+reversessh
+;;
 98)
 update
 ;;
@@ -90,6 +94,33 @@ done
 start() {
 exit="false"
 main
+}
+
+reversessh() {
+clear
+echo "Connect to Client to connect from Client to Server"
+echo "1) Client"
+echo "2) Server"
+read t
+case "$t" in
+1)
+echo "User"
+read user
+echo "Port"
+read port
+ssh -p $port $user@localhost
+;;
+2)
+echo "User"
+read user
+echo "IP Address from Client"
+read ip
+echo "Port from Client"
+read portc
+echo "Binding Port"
+read bport
+ssh -p$portc -fNC -R $bport:localhost:22 $user@$ip
+;;
 }
 
 mntsrv() {
